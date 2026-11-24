@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Velqora Agency Design Tokens
+   Editorial contrast: Warm Alabaster canvas, Obsidian Ink anchors,
+   and a restrained Signal Terracotta accent.
+   ========================================================================== */
+:root {
+  --bg-canvas: #f6f4ef;
+  --bg-surface: #ffffff;
+  --bg-subtle: #ece8df;
+  --bg-ink: #0e1015;
+  --bg-ink-elevated: #171a23;
+
+  --text-primary: #111318;
+  --text-secondary: #4a4f5c;
+  --text-muted: #6c7280;
+  --text-on-ink: #f6f4ef;
+  --text-on-ink-muted: #b0b5c0;
+
+  --accent: #d95326;
+  --accent-hover: #bf441b;
+  --accent-soft: #f9e6df;
+
+  --border-subtle: #ded9ce;
+  --border-strong: #c5bfb2;
+  --border-ink: #262a36;
+
+  --focus-ring: #d95326;
+}
+
+@theme inline {
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-subtle: var(--bg-subtle);
+  --color-ink: var(--bg-ink);
+  --color-ink-elevated: var(--bg-ink-elevated);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible, high-contrast keyboard focus ring across all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-label {
+  font-family: var(--font-mono);
+}
