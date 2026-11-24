@@ -16,14 +16,15 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="bg-[var(--bg-canvas)] py-16 sm:py-24">
+    <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+          <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Work &amp; Capabilities
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
-            Concept architectures built to show how we think
+            Concept architectures built to show{" "}
+            <span className="text-gradient-velqora">how we think</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
             Every card below is an original capability concept created by{" "}
@@ -32,14 +33,13 @@ export default function WorkPage() {
           </p>
         </Reveal>
 
-        {/* Beginner-friendly placeholder guide */}
-        <Reveal delay={0.1}>
+        <Reveal delay={0.08}>
           <aside
             aria-label="Note on concept placeholders"
-            className="mt-8 flex items-start gap-3.5 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 text-sm text-[var(--text-secondary)]"
+            className="glass-panel mt-8 flex items-start gap-3.5 rounded-2xl p-5 text-sm text-[var(--text-secondary)]"
           >
             <Info
-              className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent)]"
+              className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-cyan)]"
               aria-hidden="true"
             />
             <div>
@@ -48,15 +48,15 @@ export default function WorkPage() {
               </p>
               <p className="mt-1 leading-relaxed">
                 When you are ready to add real client projects, edit{" "}
-                <code className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
+                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
                   src/data/work.ts
                 </code>{" "}
                 and set{" "}
-                <code className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
+                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
                   isConcept: false
                 </code>
                 . Step-by-step instructions are in{" "}
-                <code className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
+                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
                   README.md
                 </code>
                 .
@@ -65,18 +65,17 @@ export default function WorkPage() {
           </aside>
         </Reveal>
 
-        {/* Concept Grid */}
         <StaggerGroup className="mt-12 grid gap-6 md:grid-cols-2">
           {WORK_CONCEPTS.map((project, index) => (
             <StaggerItem key={project.id}>
-              <article className="flex h-full flex-col justify-between rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7 transition-colors hover:border-[var(--border-strong)]">
+              <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="font-mono-label text-xs uppercase tracking-widest text-[var(--text-muted)]">
+                    <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">
                       0{index + 1} &middot; {project.category}
                     </span>
                     {project.isConcept && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-hover)]">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-cyan)]">
                         <Sparkles className="h-3 w-3" aria-hidden="true" />
                         Concept
                       </span>
@@ -101,7 +100,7 @@ export default function WorkPage() {
                       {project.deliverables.map((item) => (
                         <li
                           key={item}
-                          className="rounded-md bg-[var(--bg-subtle)] px-2.5 py-1 text-xs font-medium text-[var(--text-primary)]"
+                          className="rounded-md border border-[var(--border-subtle)] bg-white/[0.03] px-2.5 py-1 text-xs font-medium text-[var(--text-secondary)]"
                         >
                           {item}
                         </li>
@@ -118,9 +117,8 @@ export default function WorkPage() {
           ))}
         </StaggerGroup>
 
-        {/* CTA */}
         <Reveal>
-          <div className="mt-16 rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-8 text-center sm:p-12">
+          <div className="glass-panel mt-16 rounded-3xl p-8 text-center sm:p-12">
             <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)] sm:text-3xl">
               Have a project in mind?
             </h2>
@@ -131,7 +129,7 @@ export default function WorkPage() {
             <div className="mt-6">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--bg-ink)] px-6 py-3 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)]"
+                className="btn-gradient-velqora inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
               >
                 Discuss your project
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

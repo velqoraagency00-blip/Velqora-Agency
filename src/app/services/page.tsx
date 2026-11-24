@@ -16,15 +16,15 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[var(--bg-canvas)] py-16 sm:py-24">
+    <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        {/* Page Header */}
         <Reveal>
-          <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+          <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Services Directory
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
-            End-to-end digital capabilities under one roof
+            End-to-end digital capabilities{" "}
+            <span className="text-gradient-velqora">under one roof</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
             {SITE_CONFIG.brandName} organizes 14 core services across four
@@ -33,8 +33,7 @@ export default function ServicesPage() {
           </p>
         </Reveal>
 
-        {/* Quick Jump Nav */}
-        <Reveal delay={0.1}>
+        <Reveal delay={0.08}>
           <nav
             aria-label="Service categories"
             className="mt-10 flex flex-wrap gap-2.5 border-y border-[var(--border-subtle)] py-4"
@@ -43,7 +42,7 @@ export default function ServicesPage() {
               <a
                 key={group.id}
                 href={`#${group.id}`}
-                className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
               >
                 {group.index}. {group.title}
               </a>
@@ -51,7 +50,6 @@ export default function ServicesPage() {
           </nav>
         </Reveal>
 
-        {/* Service Groups */}
         <div className="mt-14 space-y-20">
           {SERVICE_GROUPS.map((group) => (
             <section
@@ -63,7 +61,7 @@ export default function ServicesPage() {
               <Reveal>
                 <div className="flex flex-col justify-between gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end">
                   <div>
-                    <span className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+                    <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--accent-cyan)]">
                       Discipline {group.index}
                     </span>
                     <h2
@@ -82,14 +80,14 @@ export default function ServicesPage() {
               <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2">
                 {group.items.map((service) => (
                   <StaggerItem key={service.id}>
-                    <article className="flex h-full flex-col justify-between rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7">
+                    <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
                       <div>
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <h3 className="font-display text-xl font-semibold text-[var(--text-primary)]">
                             {service.name}
                           </h3>
                           {service.needsLegalReview && (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-hover)]">
+                            <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-0.5 text-xs font-medium text-amber-300">
                               <AlertTriangle
                                 className="h-3 w-3"
                                 aria-hidden="true"
@@ -110,7 +108,7 @@ export default function ServicesPage() {
                               className="flex items-start gap-2.5 text-sm text-[var(--text-primary)]"
                             >
                               <CheckCircle2
-                                className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]"
+                                className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-cyan)]"
                                 aria-hidden="true"
                               />
                               <span>{deliverable}</span>
@@ -120,7 +118,7 @@ export default function ServicesPage() {
                       </div>
 
                       {service.reviewNote && (
-                        <div className="mt-6 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-3.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+                        <div className="mt-6 rounded-xl border border-[var(--border-subtle)] bg-white/[0.03] p-3.5 text-xs leading-relaxed text-[var(--text-secondary)]">
                           <strong className="font-semibold text-[var(--text-primary)]">
                             Compliance Note:{" "}
                           </strong>
@@ -135,21 +133,20 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <Reveal>
-          <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl border border-[var(--border-ink)] bg-[var(--bg-ink)] p-8 text-[var(--text-on-ink)] sm:flex-row sm:items-center sm:p-10">
+          <div className="glass-panel mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:p-10">
             <div>
-              <h2 className="font-display text-2xl font-semibold">
+              <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
                 Need a tailored combination of services?
               </h2>
-              <p className="mt-2 max-w-xl text-sm text-[var(--text-on-ink-muted)]">
+              <p className="mt-2 max-w-xl text-sm text-[var(--text-secondary)]">
                 Tell us what you are building and we will outline a clear scope
-                and timeline via email.
+                and timeline.
               </p>
             </div>
             <Link
               href="/contact"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
+              className="btn-gradient-velqora inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
             >
               Contact {SITE_CONFIG.brandName}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

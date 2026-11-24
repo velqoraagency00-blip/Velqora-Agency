@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { NAV_ITEMS, SITE_CONFIG } from "@/data/site";
 
@@ -8,85 +8,52 @@ export function SiteFooter() {
   const year = 2026;
 
   return (
-    <footer className="border-t border-[var(--border-ink)] bg-[var(--bg-ink)] text-[var(--text-on-ink)]">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+    <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-void)] text-[var(--text-primary)]">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-14">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+          <div>
             <Link
               href="/"
-              className="inline-block rounded-md"
+              className="inline-block rounded-lg"
               aria-label="Velqora Agency home"
             >
-              <BrandLogo theme="dark" size="lg" />
+              <BrandLogo size="md" />
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--text-on-ink-muted)]">
-              Multidisciplinary digital agency crafting web platforms, Shopify
-              storefronts, UX/UI systems, AI video, and growth workflows with
-              clarity and care.
+            <p className="mt-3 max-w-md text-xs leading-relaxed text-[var(--text-muted)]">
+              Digital products, design systems, and growth engineering. Email is
+              our sole direct contact channel.
             </p>
           </div>
 
-          <div className="md:col-span-3">
-            <h2 className="font-mono-label text-xs uppercase tracking-widest text-[var(--text-on-ink-muted)]">
-              Navigation
-            </h2>
-            <ul className="mt-4 space-y-2.5">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-[var(--text-on-ink)]/85 transition-colors hover:text-[var(--accent)]"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-sm text-[var(--text-on-ink)]/85 transition-colors hover:text-[var(--accent)]"
-                >
-                  Privacy
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-4">
-            <h2 className="font-mono-label text-xs uppercase tracking-widest text-[var(--text-on-ink-muted)]">
-              Direct Contact
-            </h2>
-            <p className="mt-4 text-sm text-[var(--text-on-ink-muted)]">
-              Email is our sole direct communication channel. Please do not send
-              passwords or sensitive financial documents.
-            </p>
-            <a
-              href={`mailto:${SITE_CONFIG.contactEmail}`}
-              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[var(--border-ink)] bg-[var(--bg-ink-elevated)] px-4 py-2.5 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-            >
-              <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span className="break-all">{SITE_CONFIG.contactEmail}</span>
-              <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            </a>
-          </div>
+          <a
+            href={`mailto:${SITE_CONFIG.contactEmail}`}
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+          >
+            <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="break-all">{SITE_CONFIG.contactEmail}</span>
+            <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          </a>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-[var(--border-ink)] pt-6 text-xs text-[var(--text-on-ink-muted)] sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--border-subtle)] pt-6 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center">
           <p>&copy; {year} Velqora Agency. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <nav aria-label="Footer" className="flex flex-wrap items-center gap-5">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-[var(--text-primary)]"
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
               href="/privacy"
-              className="transition-colors hover:text-[var(--text-on-ink)]"
+              className="transition-colors hover:text-[var(--text-primary)]"
             >
-              Privacy Policy
+              Privacy
             </Link>
-            <Link
-              href="/services"
-              className="transition-colors hover:text-[var(--text-on-ink)]"
-            >
-              All Services
-            </Link>
-          </div>
+          </nav>
         </div>
       </div>
     </footer>

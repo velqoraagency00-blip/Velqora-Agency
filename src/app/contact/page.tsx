@@ -11,26 +11,27 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-[var(--bg-canvas)] py-16 sm:py-24">
+    <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+          <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Contact {SITE_CONFIG.brandName}
           </p>
           <h1 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
-            Let&apos;s discuss your project
+            Let&apos;s discuss{" "}
+            <span className="text-gradient-velqora">your project</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
-            Reach out by email with a brief overview of your goals, or use the
-            inquiry preparation form below.
+            Reach out by email with a brief overview of your goals, or send your
+            inquiry directly using the form below.
           </p>
         </Reveal>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-5">
             <Reveal delay={0.08}>
-              <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7">
-                <h2 className="font-mono-label text-xs uppercase tracking-widest text-[var(--text-muted)]">
+              <div className="glass-panel rounded-2xl p-7">
+                <h2 className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">
                   Direct Email
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
@@ -39,7 +40,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`mailto:${SITE_CONFIG.contactEmail}`}
-                  className="mt-4 inline-flex items-center gap-2.5 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-canvas)] px-4 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  className="mt-4 inline-flex items-center gap-2.5 rounded-xl border border-[var(--border-strong)] bg-white/[0.03] px-4 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
                 >
                   <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span className="break-all">{SITE_CONFIG.contactEmail}</span>
@@ -48,10 +49,10 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.14}>
-              <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7">
+              <div className="glass-panel rounded-2xl p-7">
                 <div className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)]">
                   <ShieldCheck
-                    className="h-4 w-4 text-[var(--accent)]"
+                    className="h-4 w-4 text-[var(--accent-cyan)]"
                     aria-hidden="true"
                   />
                   <h2>What to include in your note</h2>

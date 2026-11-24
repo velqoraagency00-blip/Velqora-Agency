@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail, Sparkles } from "lucide-react";
+import { VMonogramSculpture } from "@/components/BrandLogo";
 import {
   Reveal,
+  ScrollShowcaseFrame,
   StaggerGroup,
   StaggerItem,
 } from "@/components/MotionPrimitives";
@@ -14,62 +16,91 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]">
-        <div className="mx-auto max-w-6xl px-5 pb-20 pt-16 sm:px-8 sm:pb-28 sm:pt-24">
-          <Reveal>
-            <p className="font-mono-label inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3.5 py-1.5 text-xs uppercase tracking-widest text-[var(--text-secondary)]">
-              <span
-                className="h-2 w-2 rounded-full bg-[var(--accent)]"
-                aria-hidden="true"
-              />
-              {SITE_CONFIG.brandName}
-            </p>
-          </Reveal>
+      <section className="ambient-grid relative overflow-hidden border-b border-[var(--border-subtle)] bg-[var(--bg-void)]">
+        {/* Subtle ambient radial glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[860px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.22)_0%,rgba(6,182,212,0.08)_45%,transparent_72%)] blur-3xl"
+        />
 
-          <Reveal delay={0.08}>
-            <h1 className="font-display mt-7 max-w-4xl text-4xl font-semibold leading-[1.06] tracking-tight text-[var(--text-primary)] sm:text-6xl lg:text-7xl">
-              Digital products, design systems, and growth built with{" "}
-              <span className="text-[var(--accent)]">quiet precision</span>.
-            </h1>
-          </Reveal>
+        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-12 sm:px-8 sm:pb-24 sm:pt-20">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            <div className="order-2 lg:order-1 lg:col-span-7">
+              <Reveal>
+                <p className="font-mono-label inline-flex items-center gap-2.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-glass)] px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] text-[var(--text-secondary)]">
+                  <span
+                    className="h-2 w-2 rounded-full bg-[var(--accent-cyan)]"
+                    aria-hidden="true"
+                  />
+                  {SITE_CONFIG.brandName}
+                </p>
+              </Reveal>
 
-          <Reveal delay={0.16}>
-            <p className="mt-7 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
-              {SITE_CONFIG.brandName} partners with businesses and founders to
-              design, engineer, and grow modern digital experiences—from web and
-              Shopify storefronts to UX/UI, mobile apps, AI video, marketing,
-              and specialized advisory.
-            </p>
-          </Reveal>
+              <Reveal delay={0.07}>
+                <h1 className="font-display mt-6 text-4xl font-semibold leading-[1.04] tracking-[-0.03em] text-[var(--text-primary)] sm:text-6xl lg:text-[4.25rem]">
+                  Coded aesthetics,{" "}
+                  <span className="text-gradient-velqora">
+                    built with precision
+                  </span>
+                  .
+                </h1>
+              </Reveal>
 
-          <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--bg-ink)] px-6 py-3.5 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)]"
-              >
-                Start a conversation
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-surface)] px-6 py-3.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--text-primary)] hover:bg-[var(--bg-subtle)]"
-              >
-                Explore all 14 services
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+              <Reveal delay={0.14}>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
+                  {SITE_CONFIG.brandName} partners with founders and growing
+                  teams to engineer web platforms, Shopify storefronts, UX/UI
+                  systems, mobile apps, AI video, and structured growth
+                  workflows.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.21}>
+                <div className="mt-9 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/contact"
+                    className="btn-gradient-velqora inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-white"
+                  >
+                    Start a conversation
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+                  >
+                    Explore all 14 services
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+
+            <div className="order-1 lg:order-2 lg:col-span-5">
+              <Reveal delay={0.1}>
+                <VMonogramSculpture />
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Desktop Scroll Indicator */}
+          <div
+            aria-hidden="true"
+            className="mt-12 hidden items-center justify-center lg:flex"
+          >
+            <span className="font-mono-label text-[10px] uppercase tracking-[0.28em] text-[var(--text-muted)]">
+              Scroll
+            </span>
+          </div>
         </div>
       </section>
 
       {/* Services Overview */}
-      <section className="border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] py-20 sm:py-24">
+      <section className="border-b border-[var(--border-subtle)] bg-[var(--bg-void)] py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <div>
-                <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+                <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
                   Capabilities
                 </p>
                 <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-4xl">
@@ -78,7 +109,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-primary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent)] hover:decoration-[var(--accent)]"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent-cyan)] hover:decoration-[var(--accent-cyan)]"
               >
                 View full service scope
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -89,10 +120,10 @@ export default function HomePage() {
           <StaggerGroup className="mt-12 grid gap-6 md:grid-cols-2">
             {SERVICE_GROUPS.map((group) => (
               <StaggerItem key={group.id}>
-                <article className="flex h-full flex-col justify-between rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-7 transition-colors hover:border-[var(--border-strong)]">
+                <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="font-mono-label text-xs uppercase tracking-widest text-[var(--text-muted)]">
+                      <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--accent-cyan)]">
                         {group.index}
                       </span>
                       <span className="font-mono-label text-xs text-[var(--text-muted)]">
@@ -111,7 +142,7 @@ export default function HomePage() {
                     {group.items.map((service) => (
                       <li
                         key={service.id}
-                        className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-1 text-xs font-medium text-[var(--text-primary)]"
+                        className="rounded-full border border-[var(--border-subtle)] bg-white/[0.03] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
                       >
                         {service.name}
                       </li>
@@ -124,13 +155,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Work & Capabilities Preview */}
-      <section className="border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-20 sm:py-24">
+      {/* Work & Capabilities Showcase */}
+      <section className="border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]/50 py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <div>
-                <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+                <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
                   Selected Capabilities
                 </p>
                 <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-4xl">
@@ -144,7 +175,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/work"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-primary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent)] hover:decoration-[var(--accent)]"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent-cyan)] hover:decoration-[var(--accent-cyan)]"
               >
                 Explore concept portfolio
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -152,57 +183,58 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <StaggerGroup className="mt-12 grid gap-6 md:grid-cols-2">
+          <ScrollShowcaseFrame className="mt-12 grid gap-6 md:grid-cols-2">
             {WORK_CONCEPTS.slice(0, 2).map((item) => (
-              <StaggerItem key={item.id}>
-                <article className="flex h-full flex-col justify-between rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7 transition-colors hover:border-[var(--border-strong)]">
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
-                        {item.category}
+              <article
+                key={item.id}
+                className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]"
+              >
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
+                      {item.category}
+                    </span>
+                    {item.isConcept && (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-cyan)]">
+                        <Sparkles className="h-3 w-3" aria-hidden="true" />
+                        Concept
                       </span>
-                      {item.isConcept && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-hover)]">
-                          <Sparkles className="h-3 w-3" aria-hidden="true" />
-                          Concept
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-display mt-4 text-xl font-semibold text-[var(--text-primary)]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                      {item.summary}
-                    </p>
+                    )}
                   </div>
+                  <h3 className="font-display mt-4 text-xl font-semibold text-[var(--text-primary)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {item.summary}
+                  </p>
+                </div>
 
-                  <div className="mt-6 border-t border-[var(--border-subtle)] pt-4">
-                    <ul className="flex flex-wrap gap-2">
-                      {item.deliverables.map((deliverable) => (
-                        <li
-                          key={deliverable}
-                          className="rounded-md bg-[var(--bg-subtle)] px-2.5 py-1 text-xs text-[var(--text-secondary)]"
-                        >
-                          {deliverable}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </StaggerItem>
+                <div className="mt-6 border-t border-[var(--border-subtle)] pt-4">
+                  <ul className="flex flex-wrap gap-2">
+                    {item.deliverables.map((deliverable) => (
+                      <li
+                        key={deliverable}
+                        className="rounded-md border border-[var(--border-subtle)] bg-white/[0.03] px-2.5 py-1 text-xs text-[var(--text-secondary)]"
+                      >
+                        {deliverable}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
             ))}
-          </StaggerGroup>
+          </ScrollShowcaseFrame>
         </div>
       </section>
 
       {/* Approach / Process */}
-      <section className="border-b border-[var(--border-ink)] bg-[var(--bg-ink)] py-20 text-[var(--text-on-ink)] sm:py-24">
+      <section className="border-b border-[var(--border-subtle)] bg-[var(--bg-void)] py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
-            <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+            <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
               How We Work
             </p>
-            <h2 className="font-display mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="font-display mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-4xl">
               A calm, structured process from first brief to handover
             </h2>
           </Reveal>
@@ -210,14 +242,14 @@ export default function HomePage() {
           <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS_STEPS.map((step) => (
               <StaggerItem key={step.number}>
-                <div className="h-full rounded-2xl border border-[var(--border-ink)] bg-[var(--bg-ink-elevated)] p-6">
-                  <span className="font-mono-label text-xs font-medium text-[var(--accent)]">
+                <div className="glass-panel h-full rounded-2xl p-6 transition-colors duration-300 hover:border-[var(--border-glow)]">
+                  <span className="font-mono-label text-xs font-medium text-[var(--accent-cyan)]">
                     {step.number}
                   </span>
-                  <h3 className="font-display mt-3 text-lg font-semibold text-[var(--text-on-ink)]">
+                  <h3 className="font-display mt-3 text-lg font-semibold text-[var(--text-primary)]">
                     {step.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--text-on-ink-muted)]">
+                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {step.description}
                   </p>
                 </div>
@@ -228,36 +260,44 @@ export default function HomePage() {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="bg-[var(--bg-canvas)] py-20 sm:py-24">
+      <section className="bg-[var(--bg-void)] py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
-            <div className="rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-8 sm:p-12">
-              <div className="grid items-center gap-8 md:grid-cols-12">
+            <div className="glass-panel relative overflow-hidden rounded-3xl p-8 sm:p-12">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.18)_0%,transparent_70%)] blur-2xl"
+              />
+              <div className="relative grid items-center gap-8 md:grid-cols-12">
                 <div className="md:col-span-8">
-                  <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+                  <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
                     Get in Touch
                   </p>
                   <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-4xl">
-                    Ready to scope your next project with {SITE_CONFIG.brandName}?
+                    Ready to scope your next project with{" "}
+                    <span className="text-gradient-velqora">
+                      {SITE_CONFIG.brandName}
+                    </span>
+                    ?
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
-                    Reach out directly by email or preview our project inquiry
-                    form. Please avoid sending passwords or sensitive financial
-                    documents.
+                    Reach out directly by email or submit your inquiry through
+                    our contact form. Please avoid sending passwords or
+                    sensitive financial documents.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-3 md:col-span-4 md:items-end">
                   <Link
                     href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--bg-ink)] px-6 py-3.5 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)] md:w-auto"
+                    className="btn-gradient-velqora inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-white md:w-auto"
                   >
                     Go to Contact page
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <a
                     href={`mailto:${SITE_CONFIG.contactEmail}`}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)] md:w-auto"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-5 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)] md:w-auto"
                   >
                     <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="truncate">{SITE_CONFIG.contactEmail}</span>

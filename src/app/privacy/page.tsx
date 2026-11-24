@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[var(--bg-canvas)] py-16 sm:py-24">
+    <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+          <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Privacy Policy (Draft)
           </p>
           <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
@@ -26,9 +26,9 @@ export default function PrivacyPage() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="mt-8 flex items-start gap-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 text-sm text-[var(--text-secondary)]">
+          <div className="glass-panel mt-8 flex items-start gap-3 rounded-2xl p-5 text-sm text-[var(--text-secondary)]">
             <AlertTriangle
-              className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent)]"
+              className="mt-0.5 h-5 w-5 shrink-0 text-amber-300"
               aria-hidden="true"
             />
             <p>
@@ -49,11 +49,21 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-2">
               When you submit the contact form on this website, we collect only
-              the details you enter: your <strong>name</strong>,{" "}
-              <strong>email address</strong>,{" "}
-              <strong>service of interest</strong>, <strong>message</strong>,
-              and your <strong>privacy consent confirmation</strong>. We do not
-              collect phone numbers through the form.
+              the details you enter:{" "}
+              <strong className="text-[var(--text-primary)]">your name</strong>,{" "}
+              <strong className="text-[var(--text-primary)]">
+                email address
+              </strong>
+              ,{" "}
+              <strong className="text-[var(--text-primary)]">
+                service of interest
+              </strong>
+              , <strong className="text-[var(--text-primary)]">message</strong>,
+              and your{" "}
+              <strong className="text-[var(--text-primary)]">
+                privacy consent confirmation
+              </strong>
+              . We do not collect phone numbers through the form.
             </p>
           </section>
 
@@ -63,10 +73,10 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-2">
               Submitted inquiries are validated by our server and stored in our{" "}
-              <strong>Supabase</strong> database so {SITE_CONFIG.brandName} can
-              review them and respond to you. Inquiries are accessed only
-              through the authenticated Supabase dashboard and are not exposed
-              through public website endpoints.
+              <strong className="text-[var(--text-primary)]">Supabase</strong>{" "}
+              database so {SITE_CONFIG.brandName} can review them and respond to
+              you. Inquiries are accessed only through the authenticated Supabase
+              dashboard and are not exposed through public website endpoints.
             </p>
           </section>
 
@@ -78,7 +88,7 @@ export default function PrivacyPage() {
               If you email{" "}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"
+                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
               >
                 {SITE_CONFIG.contactEmail}
               </a>{" "}
@@ -118,7 +128,7 @@ export default function PrivacyPage() {
               submitted inquiry, contact {SITE_CONFIG.brandName} at{" "}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"
+                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
               >
                 {SITE_CONFIG.contactEmail}
               </a>

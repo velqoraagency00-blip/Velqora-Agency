@@ -33,14 +33,17 @@ const PRINCIPLES = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-[var(--bg-canvas)] py-16 sm:py-24">
+    <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
+          <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             About {SITE_CONFIG.brandName}
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
-            Built to bridge design craft, engineering, and practical growth
+            Built to bridge design craft,{" "}
+            <span className="text-gradient-velqora">
+              engineering, and practical growth
+            </span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
             {SITE_CONFIG.brandName} is a multidisciplinary digital agency
@@ -50,7 +53,6 @@ export default function AboutPage() {
           </p>
         </Reveal>
 
-        {/* Principles */}
         <section className="mt-16" aria-labelledby="principles-heading">
           <Reveal>
             <h2
@@ -64,7 +66,7 @@ export default function AboutPage() {
           <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-3">
             {PRINCIPLES.map((principle) => (
               <StaggerItem key={principle.title}>
-                <article className="h-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-7">
+                <article className="glass-panel h-full rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
                   <h3 className="font-display text-xl font-semibold text-[var(--text-primary)]">
                     {principle.title}
                   </h3>
@@ -77,7 +79,6 @@ export default function AboutPage() {
           </StaggerGroup>
         </section>
 
-        {/* Process */}
         <section className="mt-20" aria-labelledby="process-heading">
           <Reveal>
             <h2
@@ -91,8 +92,8 @@ export default function AboutPage() {
           <StaggerGroup className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS_STEPS.map((step) => (
               <StaggerItem key={step.number}>
-                <div className="h-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6">
-                  <span className="font-mono-label text-xs font-medium text-[var(--accent)]">
+                <div className="glass-panel h-full rounded-2xl p-6 transition-colors duration-300 hover:border-[var(--border-glow)]">
+                  <span className="font-mono-label text-xs font-medium text-[var(--accent-cyan)]">
                     {step.number}
                   </span>
                   <h3 className="font-display mt-3 text-lg font-semibold text-[var(--text-primary)]">
@@ -111,14 +112,14 @@ export default function AboutPage() {
           <div className="mt-16 flex flex-wrap items-center gap-4">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--bg-ink)] px-6 py-3 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)]"
+              className="btn-gradient-velqora inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
             >
               Explore our services
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-surface)] px-6 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)]"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-6 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
             >
               Get in touch
             </Link>
