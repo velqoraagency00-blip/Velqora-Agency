@@ -5,7 +5,7 @@ import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: `Privacy Policy for ${SITE_CONFIG.brandName}.`,
+  description: `Draft Privacy Policy for ${SITE_CONFIG.brandName}.`,
 };
 
 export default function PrivacyPage() {
@@ -14,13 +14,14 @@ export default function PrivacyPage() {
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
           <p className="font-mono-label text-xs uppercase tracking-widest text-[var(--accent)]">
-            Privacy Policy
+            Privacy Policy (Draft)
           </p>
           <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
             How {SITE_CONFIG.brandName} handles information
           </h1>
           <p className="mt-4 text-sm text-[var(--text-muted)]">
-            Baseline policy — review with legal counsel prior to public launch.
+            Draft baseline policy — requires owner and legal review prior to
+            public launch.
           </p>
         </Reveal>
 
@@ -32,11 +33,11 @@ export default function PrivacyPage() {
             />
             <p>
               <strong className="font-semibold text-[var(--text-primary)]">
-                Business &amp; Legal Review Notice:
+                Draft Notice — Owner Review Required:
               </strong>{" "}
-              This privacy page reflects the current static frontend build.
-              Update and have it reviewed by a qualified legal advisor before
-              connecting a live contact-form backend or analytics tools.
+              This page is a plain-English draft describing how the contact form
+              currently works. Have it reviewed by the business owner and a
+              qualified legal advisor before relying on it for legal compliance.
             </p>
           </div>
         </Reveal>
@@ -44,7 +45,51 @@ export default function PrivacyPage() {
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
           <section>
             <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              1. Analytics &amp; Tracking
+              1. Information Collected Through the Contact Form
+            </h2>
+            <p className="mt-2">
+              When you submit the contact form on this website, we collect only
+              the details you enter: your <strong>name</strong>,{" "}
+              <strong>email address</strong>,{" "}
+              <strong>service of interest</strong>, <strong>message</strong>,
+              and your <strong>privacy consent confirmation</strong>. We do not
+              collect phone numbers through the form.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+              2. How &amp; Where Inquiries Are Stored
+            </h2>
+            <p className="mt-2">
+              Submitted inquiries are validated by our server and stored in our{" "}
+              <strong>Supabase</strong> database so {SITE_CONFIG.brandName} can
+              review them and respond to you. Inquiries are accessed only
+              through the authenticated Supabase dashboard and are not exposed
+              through public website endpoints.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+              3. Direct Email Inquiries
+            </h2>
+            <p className="mt-2">
+              If you email{" "}
+              <a
+                href={`mailto:${SITE_CONFIG.contactEmail}`}
+                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"
+              >
+                {SITE_CONFIG.contactEmail}
+              </a>{" "}
+              directly, we use your email address and message to respond to your
+              inquiry.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+              4. Analytics &amp; Tracking
             </h2>
             <p className="mt-2">
               {SITE_CONFIG.brandName} does not currently use third-party
@@ -55,40 +100,22 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              2. Contact Inquiries
-            </h2>
-            <p className="mt-2">
-              The contact form on this site is currently in preview mode and
-              does not transmit or store submissions on a server. If you email{" "}
-              <a
-                href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"
-              >
-                {SITE_CONFIG.contactEmail}
-              </a>{" "}
-              directly, we use your email address and message solely to respond
-              to your inquiry.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              3. Sensitive Personal &amp; Financial Data
+              5. Sensitive Personal &amp; Financial Data
             </h2>
             <p className="mt-2">
               Please do not send passwords, Social Security numbers, payment
               account numbers, or confidential financial documents through the
-              website contact form or unencrypted initial inquiry emails.
+              website contact form or initial inquiry emails.
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              4. Contact for Privacy Questions
+              6. Contact for Privacy Questions
             </h2>
             <p className="mt-2">
-              For any privacy-related questions, contact{" "}
-              {SITE_CONFIG.brandName} at{" "}
+              For any privacy-related questions or to request removal of a
+              submitted inquiry, contact {SITE_CONFIG.brandName} at{" "}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
                 className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"

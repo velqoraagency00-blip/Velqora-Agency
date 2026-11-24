@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { AlertCircle, Mail, ShieldAlert } from "lucide-react";
+import { CheckCircle2, Mail, ShieldAlert } from "lucide-react";
 import { ALL_SERVICE_NAMES } from "@/data/services";
 import { SITE_CONFIG } from "@/data/site";
 
@@ -12,29 +12,74 @@ export function ContactForm() {
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
-  const [validationError, setValidationError] = useState<string | null>(null);
-  const [previewNotice, setPreviewNotice] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setPreviewNotice(false);
+    setIsSaved(false);
 
     if (!name.trim() || !email.trim() || !service || !message.trim()) {
-      setValidationError("Please complete all required fields before continuing.");
+      setErrorMessage("Please complete all required fields before submitting.");
       return;
     }
 
     if (!consent) {
-      setValidationError(
+      setErrorMessage(
         "Please confirm that you have read the Privacy Policy notice."
       );
       return;
     }
 
-    setValidationError(null);
-    // Backend email delivery is intentionally not implemented in Phase 1.
-    // Never pretend the message was delivered.
-    setPreviewNotice(true);
+    setErrorMessage(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          service,
+          message: message.trim(),
+          consent,
+          honeypot,
+        }),
+      });
+
+      const data = (await response.json().catch(() => null)) as {
+        ok?: boolean;
+        error?: string;
+      } | null;
+
+      if (!response.ok || !data?.ok) {
+        setErrorMessage(
+          data?.error ||
+            `Your inquiry was not submitted. Please email ${SITE_CONFIG.contactEmail} directly.`
+        );
+        return;
+      }
+
+      setIsSaved(true);
+      setName("");
+      setEmail("");
+      setService("");
+      setMessage("");
+      setConsent(false);
+      setHoneypot("");
+    } catch {
+      setErrorMessage(
+        `We could not reach the server. Your inquiry was not submitted—please email ${SITE_CONFIG.contactEmail} directly.`
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const mailtoHref = `mailto:${SITE_CONFIG.contactEmail}?subject=${encodeURIComponent(
@@ -47,30 +92,8 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 sm:p-8"
+      className="relative rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 sm:p-8"
     >
-      {/* Honest backend-status banner */}
-      <div className="mb-6 flex items-start gap-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-4 text-xs leading-relaxed text-[var(--text-secondary)]">
-        <AlertCircle
-          className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]"
-          aria-hidden="true"
-        />
-        <p>
-          <strong className="font-semibold text-[var(--text-primary)]">
-            Form Backend Not Connected Yet:
-          </strong>{" "}
-          This form validates your inquiry locally in preview mode and does not
-          transmit data automatically. For immediate inquiries, please email{" "}
-          <a
-            href={`mailto:${SITE_CONFIG.contactEmail}`}
-            className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent)] underline-offset-2"
-          >
-            {SITE_CONFIG.contactEmail}
-          </a>
-          .
-        </p>
-      </div>
-
       {/* Sensitive-data warning */}
       <div className="mb-6 flex items-start gap-3 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent-soft)]/50 p-4 text-xs leading-relaxed text-[var(--text-primary)]">
         <ShieldAlert
@@ -82,6 +105,23 @@ export function ContactForm() {
           include passwords, Social Security numbers, bank or card account
           numbers, or confidential financial documents in this form.
         </p>
+      </div>
+
+      {/* Honeypot field for spam filtering (hidden from real visitors and screen readers) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+      >
+        <label htmlFor="contact-company-site">Leave this field blank</label>
+        <input
+          id="contact-company-site"
+          name="honeypot"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
       </div>
 
       <div className="space-y-5">
@@ -97,6 +137,7 @@ export function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            maxLength={120}
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -117,6 +158,7 @@ export function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
+            maxLength={254}
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -161,6 +203,7 @@ export function ContactForm() {
             id="contact-message"
             name="message"
             rows={5}
+            maxLength={4000}
             required
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -182,8 +225,8 @@ export function ContactForm() {
             htmlFor="contact-consent"
             className="text-xs leading-relaxed text-[var(--text-secondary)]"
           >
-            I understand that this form is currently in preview mode and I have
-            read the{" "}
+            I consent to {SITE_CONFIG.brandName} storing my inquiry details to
+            respond to my message, as described in the{" "}
             <Link
               href="/privacy"
               className="font-medium text-[var(--text-primary)] underline underline-offset-2"
@@ -195,44 +238,50 @@ export function ContactForm() {
         </div>
       </div>
 
-      {validationError && (
-        <p
-          role="alert"
-          className="mt-5 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-xs font-medium text-red-800"
-        >
-          {validationError}
-        </p>
-      )}
-
-      {previewNotice && (
+      {errorMessage && (
         <div
-          role="status"
-          className="mt-5 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-subtle)] p-4 text-xs leading-relaxed text-[var(--text-primary)]"
+          role="alert"
+          className="mt-5 rounded-xl border border-red-300 bg-red-50 p-4 text-xs leading-relaxed text-red-900"
         >
-          <p className="font-semibold">
-            No message was sent — online submission is not active yet.
-          </p>
-          <p className="mt-1 text-[var(--text-secondary)]">
-            Your inputs look valid, but this website does not have a live form
-            backend yet. You can open your email app with your draft pre-filled
-            below:
-          </p>
+          <p className="font-semibold">{errorMessage}</p>
           <a
             href={mailtoHref}
             className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--bg-ink)] px-4 py-2 text-xs font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)]"
           >
             <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-            Open email to {SITE_CONFIG.contactEmail}
+            Email {SITE_CONFIG.contactEmail} instead
           </a>
+        </div>
+      )}
+
+      {isSaved && (
+        <div
+          role="status"
+          className="mt-5 flex items-start gap-3 rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-xs leading-relaxed text-emerald-950"
+        >
+          <CheckCircle2
+            className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700"
+            aria-hidden="true"
+          />
+          <div>
+            <p className="font-semibold">
+              Your inquiry has been saved.
+            </p>
+            <p className="mt-1 text-emerald-900">
+              Thank you for contacting {SITE_CONFIG.brandName}. Our team reviews
+              saved inquiries and will reply to your email address.
+            </p>
+          </div>
         </div>
       )}
 
       <div className="mt-7">
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center rounded-full bg-[var(--bg-ink)] px-6 py-3.5 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)] sm:w-auto"
+          disabled={isSubmitting}
+          className="inline-flex w-full items-center justify-center rounded-full bg-[var(--bg-ink)] px-6 py-3.5 text-sm font-medium text-[var(--text-on-ink)] transition-colors hover:bg-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          Check &amp; Prepare Inquiry
+          {isSubmitting ? "Sending inquiry..." : "Send Inquiry"}
         </button>
       </div>
     </form>
