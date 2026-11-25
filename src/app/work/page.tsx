@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Info, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { ConceptShowcase } from "@/components/ConceptShowcase";
 import {
   HeroReveal,
@@ -41,38 +41,6 @@ export default function WorkPage() {
             {SITE_CONFIG.brandName}. We do not publish fabricated client names,
             invented awards, or made-up performance metrics.
           </p>
-        </HeroReveal>
-
-        <HeroReveal delay={0.18} y={14}>
-          <aside
-            aria-label="Note on concept placeholders"
-            className="glass-panel mt-8 flex items-start gap-3.5 rounded-2xl p-5 text-sm text-[var(--text-secondary)]"
-          >
-            <Info
-              className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-cyan)]"
-              aria-hidden="true"
-            />
-            <div>
-              <p className="font-medium text-[var(--text-primary)]">
-                Editable Concept Placeholders
-              </p>
-              <p className="mt-1 leading-relaxed">
-                When you are ready to add real client projects, edit{" "}
-                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
-                  src/data/work.ts
-                </code>{" "}
-                and set{" "}
-                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
-                  isConcept: false
-                </code>
-                . Step-by-step instructions are in{" "}
-                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-[var(--text-primary)]">
-                  README.md
-                </code>
-                .
-              </p>
-            </div>
-          </aside>
         </HeroReveal>
 
         <ScrollShowcaseBand className="mt-12">
