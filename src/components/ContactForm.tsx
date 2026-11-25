@@ -501,15 +501,7 @@ export function ContactForm() {
           disabled={!isFormConfigured || isSubmitting}
           className="btn-gradient-velqora velqora-roll-btn inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
         >
-          <RollingLabel
-            label={
-              !isFormConfigured
-                ? "Online Form Not Connected"
-                : isSubmitting
-                ? "Sending message..."
-                : "Send Inquiry"
-            }
-          />
+          <RollingLabel label={isSubmitting ? "Submitting..." : "Submit"} />
         </button>
       </div>
     </form>
