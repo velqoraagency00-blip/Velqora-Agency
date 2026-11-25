@@ -74,13 +74,17 @@ export function Reveal({
     return <div className={className}>{children}</div>;
   }
 
+  // Constrain horizontal slide offset within mobile horizontal padding (px-5 = 20px)
+  // so offscreen left/right reveals stay inside the viewport before triggering.
+  const horizontalDistance = Math.min(distance, 16);
+
   const initialByDirection: Record<
     RevealDirection,
     { opacity: number; x?: number; y?: number; scale?: number }
   > = {
     up: { opacity: 0, y: distance },
-    left: { opacity: 0, x: -distance },
-    right: { opacity: 0, x: distance },
+    left: { opacity: 0, x: -horizontalDistance },
+    right: { opacity: 0, x: horizontalDistance },
     scale: { opacity: 0, scale: 0.96, y: 12 },
   };
 

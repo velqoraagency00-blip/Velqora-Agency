@@ -74,7 +74,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     index: "02",
     title: "Design & Creative Production",
     subtitle:
-      "Intentional visual systems, interface design, and modern AI-assisted video production that keep your brand cohesive.",
+      "Intentional visual systems, brand identity, graphic and presentation collateral, interface design, and modern AI-assisted video production.",
     items: [
       {
         id: "website-design",
@@ -96,6 +96,50 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           "Information architecture & user flows",
           "High-fidelity UI component kits",
           "Accessibility & contrast review",
+        ],
+      },
+      {
+        id: "brand-identity-and-branding",
+        name: "Brand identity and branding",
+        summary:
+          "Cohesive visual identities, logo marks, color palettes, typography direction, and brand guidelines built to stay consistent across every touchpoint.",
+        deliverables: [
+          "Logo & monogram mark systems",
+          "Color, typography & visual direction",
+          "Brand style guide & asset kit",
+        ],
+      },
+      {
+        id: "graphic-design",
+        name: "Graphic design",
+        summary:
+          "Custom marketing visuals, social graphics, campaign artwork, and digital brand collateral crafted for clarity and visual impact.",
+        deliverables: [
+          "Campaign & social media graphics",
+          "Custom illustrations & visual templates",
+          "Print-ready & digital export packages",
+        ],
+      },
+      {
+        id: "flyer-design",
+        name: "Flyer design",
+        summary:
+          "Structured promotional and event flyers designed for immediate readability, strong hierarchy, and crisp print or digital sharing.",
+        deliverables: [
+          "Single- & double-sided flyer layouts",
+          "Event, launch & promotional formatting",
+          "Print-ready PDF & social share exports",
+        ],
+      },
+      {
+        id: "presentation-design",
+        name: "Presentation design",
+        summary:
+          "Clean, persuasive slide decks and reusable presentation templates structured for pitches, company overviews, and client workshops.",
+        deliverables: [
+          "Custom slide master & layout system",
+          "Visual diagrams & structured data slides",
+          "Editable slide deck handover",
         ],
       },
       {
@@ -175,6 +219,14 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
 ];
 
-export const ALL_SERVICE_NAMES: string[] = SERVICE_GROUPS.flatMap((group) =>
-  group.items.map((item) => item.name)
+export const ALL_SERVICE_ITEMS: ServiceItem[] = SERVICE_GROUPS.flatMap(
+  (group) => group.items
 );
+
+export const ALL_SERVICE_NAMES: string[] = ALL_SERVICE_ITEMS.map(
+  (item) => item.name
+);
+
+export const TOTAL_SERVICES_COUNT: number = ALL_SERVICE_ITEMS.length;
+
+export const TOTAL_DISCIPLINES_COUNT: number = SERVICE_GROUPS.length;

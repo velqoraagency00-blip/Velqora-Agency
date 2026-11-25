@@ -11,7 +11,11 @@ import {
   StaggerGroup,
   StaggerItem,
 } from "@/components/MotionPrimitives";
-import { SERVICE_GROUPS } from "@/data/services";
+import {
+  SERVICE_GROUPS,
+  TOTAL_DISCIPLINES_COUNT,
+  TOTAL_SERVICES_COUNT,
+} from "@/data/services";
 import { PROCESS_STEPS, SITE_CONFIG } from "@/data/site";
 
 export default function HomePage() {
@@ -51,9 +55,9 @@ export default function HomePage() {
               <HeroReveal delay={0.14} y={18}>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
                   {SITE_CONFIG.brandName} partners with founders and growing
-                  teams to engineer web platforms, Shopify storefronts, UX/UI
-                  systems, mobile apps, AI video, and structured growth
-                  workflows.
+                  teams to engineer web platforms, Shopify storefronts, brand
+                  identity and graphic design systems, UX/UI, mobile apps, AI
+                  video, and structured growth workflows.
                 </p>
               </HeroReveal>
 
@@ -70,7 +74,9 @@ export default function HomePage() {
                     href="/services"
                     className="velqora-roll-btn inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
                   >
-                    <RollingLabel label="Explore all 11 services" />
+                    <RollingLabel
+                      label={`Explore all ${TOTAL_SERVICES_COUNT} services`}
+                    />
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
@@ -107,7 +113,8 @@ export default function HomePage() {
                   Capabilities
                 </p>
                 <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-4xl">
-                  Eleven services, four focused disciplines
+                  {TOTAL_SERVICES_COUNT} services, {TOTAL_DISCIPLINES_COUNT}{" "}
+                  focused disciplines
                 </h2>
               </div>
               <Link

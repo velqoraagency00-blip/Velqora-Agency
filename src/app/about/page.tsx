@@ -56,8 +56,8 @@ export default function AboutPage() {
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
             {SITE_CONFIG.brandName} is a multidisciplinary digital agency
             focused on helping businesses launch dependable websites, Shopify
-            storefronts, mobile apps, creative media, and advisory workflows
-            without unnecessary complexity.
+            storefronts, brand identity and graphic design systems, mobile apps,
+            creative media, and advisory workflows without unnecessary complexity.
           </p>
         </HeroReveal>
 

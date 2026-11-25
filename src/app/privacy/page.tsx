@@ -81,16 +81,24 @@ export default function PrivacyPage() {
           <StaggerItem>
             <section>
               <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-                2. How &amp; Where Inquiries Are Stored
+                2. How Form Submissions Are Processed
               </h2>
               <p className="mt-2">
-                Submitted inquiries are validated by our server and stored in
-                our{" "}
-                <strong className="text-[var(--text-primary)]">Supabase</strong>{" "}
-                database so {SITE_CONFIG.brandName} can review them and respond
-                to you. Inquiries are accessed only through the authenticated
-                Supabase dashboard and are not exposed through public website
-                endpoints.
+                When configured, this website&apos;s contact form sends
+                submissions directly from your browser to{" "}
+                <strong className="text-[var(--text-primary)]">Formspree</strong>
+                , a third-party form processing service, so your message can be
+                filtered for spam and forwarded to{" "}
+                <a
+                  href={`mailto:${SITE_CONFIG.contactEmail}`}
+                  className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
+                >
+                  {SITE_CONFIG.contactEmail}
+                </a>
+                . {SITE_CONFIG.brandName} does not run a custom backend or
+                website database for this form; submitted details are handled
+                through Formspree&apos;s hosted infrastructure and email
+                forwarding workflow.
               </p>
             </section>
           </StaggerItem>

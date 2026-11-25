@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   shortTagline: "Digital Product, Design & Growth Studio",
   contactEmail: "velqoraagency00@gmail.com",
   description:
-    "Velqora Agency is a multidisciplinary digital agency delivering web & Shopify development, UX/UI design, mobile apps, AI video, marketing, and advisory services.",
+    "Velqora Agency is a multidisciplinary digital agency delivering web & Shopify development, brand identity, UX/UI, graphic, flyer, and presentation design, mobile apps, AI video, marketing, and advisory services.",
 } as const;
 
 export const NAV_ITEMS: NavItem[] = [

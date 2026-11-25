@@ -8,12 +8,16 @@ import {
   StaggerGroup,
   StaggerItem,
 } from "@/components/MotionPrimitives";
-import { SERVICE_GROUPS } from "@/data/services";
+import {
+  SERVICE_GROUPS,
+  TOTAL_DISCIPLINES_COUNT,
+  TOTAL_SERVICES_COUNT,
+} from "@/data/services";
 import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: `Explore all 11 services offered by ${SITE_CONFIG.brandName}, spanning web and Shopify development, UX/UI design, mobile apps, AI video, marketing, and advisory.`,
+  description: `Explore all ${TOTAL_SERVICES_COUNT} services offered by ${SITE_CONFIG.brandName}, spanning web and Shopify development, brand identity, UX/UI, graphic, flyer, and presentation design, mobile apps, AI video, marketing, and advisory.`,
 };
 
 export default function ServicesPage() {
@@ -35,9 +39,10 @@ export default function ServicesPage() {
 
         <HeroReveal delay={0.14} y={16}>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
-            {SITE_CONFIG.brandName} organizes 11 core services across four
-            disciplines. Every engagement is scoped transparently—with no
-            inflated promises or guaranteed outcome claims.
+            {SITE_CONFIG.brandName} organizes {TOTAL_SERVICES_COUNT} core
+            services across {TOTAL_DISCIPLINES_COUNT} disciplines. Every
+            engagement is scoped transparently—with no inflated promises or
+            guaranteed outcome claims.
           </p>
         </HeroReveal>
 
@@ -70,7 +75,8 @@ export default function ServicesPage() {
                 <div className="flex flex-col justify-between gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end">
                   <div>
                     <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--accent-cyan)]">
-                      Discipline {group.index}
+                      Discipline {group.index} &middot; {group.items.length}{" "}
+                      {group.items.length === 1 ? "service" : "services"}
                     </span>
                     <h2
                       id={`${group.id}-heading`}
