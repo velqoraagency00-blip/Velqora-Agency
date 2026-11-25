@@ -267,7 +267,7 @@ export function SiteHeader() {
                     onClick={() => setOpenPath(null)}
                     className="btn-gradient-velqora velqora-roll-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
                   >
-                    <RollingLabel label="Open Contact Form" />
+                    <RollingLabel label="Get in Touch" />
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>

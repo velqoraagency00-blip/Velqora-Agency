@@ -262,9 +262,9 @@ export default function HomePage() {
                     ?
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
-                    Reach out directly by email or submit your inquiry through
-                    our contact form. Please avoid sending passwords or
-                    sensitive financial documents.
+                    Reach out directly by email to share your project goals and
+                    timeline. Please avoid sending passwords or sensitive
+                    financial documents.
                   </p>
                 </div>
 
