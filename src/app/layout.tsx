@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/CustomCursor";
 import { MotionProvider } from "@/components/MotionPrimitives";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -44,6 +45,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-[var(--bg-void)] text-[var(--text-primary)]">
         <MotionProvider>
+          <CustomCursor />
           <SiteHeader />
           <main id="main-content" className="flex-1">
             {children}

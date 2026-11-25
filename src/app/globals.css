@@ -251,4 +251,104 @@ body {
     transition: none;
     transform: none;
   }
+
+  .velqora-custom-cursor {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Velqora Custom Cyan Ring Cursor (Fine pointer desktop/laptop only)
+   ========================================================================== */
+.velqora-custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.16s ease;
+}
+
+.velqora-custom-cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+.velqora-custom-cursor-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.45),
+    inset 0 0 6px rgba(6, 182, 212, 0.16);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.velqora-custom-cursor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.7);
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.velqora-custom-cursor[data-hover="true"] .velqora-custom-cursor-ring {
+  transform: scale(1.25);
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.65),
+    inset 0 0 8px rgba(6, 182, 212, 0.25);
+}
+
+.velqora-custom-cursor[data-pressed="true"] .velqora-custom-cursor-ring {
+  transform: scale(0.9);
+}
+
+.velqora-custom-cursor[data-pressed="true"] .velqora-custom-cursor-dot {
+  transform: scale(0.85);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.velqora-cursor-active,
+  html.velqora-cursor-active body {
+    cursor: none;
+  }
+
+  html.velqora-cursor-active a,
+  html.velqora-cursor-active button,
+  html.velqora-cursor-active [role="button"],
+  html.velqora-cursor-active [role="tab"],
+  html.velqora-cursor-active select,
+  html.velqora-cursor-active summary,
+  html.velqora-cursor-active label,
+  html.velqora-cursor-active input[type="checkbox"],
+  html.velqora-cursor-active input[type="radio"] {
+    cursor: none;
+  }
+
+  html.velqora-cursor-active
+    input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]),
+  html.velqora-cursor-active textarea,
+  html.velqora-cursor-active [contenteditable="true"],
+  html.velqora-cursor-active [contenteditable=""],
+  html.velqora-cursor-active :is(p, h1, h2, h3, h4, h5, h6, li, blockquote, code, pre) {
+    cursor: text;
+  }
+
+  html.velqora-cursor-active :is(a, button, [role="button"], [role="tab"], label) * {
+    cursor: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .velqora-custom-cursor {
+    display: none !important;
+  }
 }
