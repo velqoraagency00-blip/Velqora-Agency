@@ -186,13 +186,25 @@ export default function HomePage() {
                   engineering, design, and growth systems.
                 </p>
               </div>
-              <Link
-                href="/work"
-                className="velqora-roll-btn inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent-cyan)] hover:decoration-[var(--accent-cyan)]"
-              >
-                <RollingLabel label="View all concepts" />
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+              <div className="flex flex-wrap items-center gap-5">
+                <a
+                  href={SITE_CONFIG.portfolioUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open GitHub portfolio (opens in a new tab)"
+                  className="velqora-roll-btn inline-flex items-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+                >
+                  <RollingLabel label="View GitHub Portfolio" />
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <Link
+                  href="/work"
+                  className="velqora-roll-btn inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent-cyan)] hover:decoration-[var(--accent-cyan)]"
+                >
+                  <RollingLabel label="View all concepts" />
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </Reveal>
 
@@ -249,8 +261,8 @@ export default function HomePage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.22)_0%,transparent_70%)] blur-2xl"
               />
-              <div className="relative grid items-center gap-8 md:grid-cols-12">
-                <div className="md:col-span-8">
+              <div className="relative grid items-center gap-8 lg:grid-cols-12">
+                <div className="lg:col-span-7">
                   <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
                     Get in Touch
                   </p>
@@ -268,17 +280,17 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-3 md:col-span-4 md:items-end">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:flex-col lg:items-end">
                   <Link
                     href="/contact"
-                    className="btn-gradient-velqora velqora-roll-btn inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-white md:w-auto"
+                    className="btn-gradient-velqora velqora-roll-btn inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-white sm:w-auto"
                   >
                     <RollingLabel label="Go to Contact page" />
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <a
                     href={`mailto:${SITE_CONFIG.contactEmail}`}
-                    className="velqora-roll-btn inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-5 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)] md:w-auto"
+                    className="velqora-roll-btn inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-5 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)] sm:w-auto"
                   >
                     <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="truncate">{SITE_CONFIG.contactEmail}</span>

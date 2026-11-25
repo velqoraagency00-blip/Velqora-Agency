@@ -43,6 +43,21 @@ export default function WorkPage() {
           </p>
         </HeroReveal>
 
+        <HeroReveal delay={0.18} y={14}>
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <a
+              href={SITE_CONFIG.portfolioUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open GitHub portfolio (opens in a new tab)"
+              className="btn-gradient-velqora velqora-roll-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
+            >
+              <RollingLabel label="View Portfolio on GitHub" />
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </HeroReveal>
+
         <ScrollShowcaseBand className="mt-12">
           <ConceptShowcase />
         </ScrollShowcaseBand>

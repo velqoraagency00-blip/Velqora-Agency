@@ -1,6 +1,7 @@
 export interface NavItem {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 export interface ProcessStep {
@@ -13,6 +14,7 @@ export const SITE_CONFIG = {
   brandName: "Velqora Agency",
   shortTagline: "Digital Product, Design & Growth Studio",
   contactEmail: "velqoraagency00@gmail.com",
+  portfolioUrl: "https://github.com/DigitalExpart?tab=repositories",
   description:
     "Velqora Agency is a multidisciplinary digital agency delivering web & Shopify development, brand identity, UX/UI, graphic, flyer, and presentation design, mobile apps, AI video, marketing, and advisory services.",
 } as const;
@@ -21,6 +23,11 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
+  {
+    label: "Portfolio",
+    href: SITE_CONFIG.portfolioUrl,
+    external: true,
+  },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

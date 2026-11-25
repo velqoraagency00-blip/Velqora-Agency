@@ -41,15 +41,29 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--border-subtle)] pt-6 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center">
           <p>&copy; {year} Velqora Agency. All rights reserved.</p>
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-5">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition-colors hover:text-[var(--text-primary)]"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${item.label} on GitHub (opens in a new tab)`}
+                  className="inline-flex items-center gap-1 transition-colors hover:text-[var(--text-primary)]"
+                >
+                  <span>{item.label}</span>
+                  <ArrowUpRight className="h-3 w-3 shrink-0" aria-hidden="true" />
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors hover:text-[var(--text-primary)]"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
             <Link
               href="/privacy"
               className="transition-colors hover:text-[var(--text-primary)]"

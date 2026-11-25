@@ -101,7 +101,7 @@ export function SiteHeader() {
           {/* Left: Brand Monogram & Wordmark */}
           <Link
             href="/"
-            className="rounded-lg py-1 transition-opacity hover:opacity-90"
+            className="shrink-0 whitespace-nowrap rounded-lg py-1 transition-opacity hover:opacity-90"
             aria-label="Velqora Agency home"
           >
             <BrandLogo size="md" />
@@ -110,13 +110,29 @@ export function SiteHeader() {
           {/* Center: Glass Pill Navigation with Sliding Active Highlight (Desktop) */}
           <nav
             aria-label="Primary"
-            className={`hidden items-center gap-1 rounded-full px-2 py-1.5 transition-all duration-500 md:flex ${
+            className={`hidden items-center gap-1 rounded-full px-2 py-1.5 transition-all duration-500 lg:flex ${
               scrolled
                 ? "border border-[var(--border-subtle)] bg-[var(--bg-glass)] shadow-[0_8px_32px_rgba(2,6,23,0.55)] backdrop-blur-md"
                 : "border border-white/10 bg-white/[0.03]"
             }`}
           >
             {NAV_ITEMS.map((item) => {
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.label} on GitHub (opens in a new tab)`}
+                    className="relative inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)] lg:px-3.5"
+                  >
+                    {item.label}
+                    <ArrowUpRight className="h-3 w-3 shrink-0" aria-hidden="true" />
+                  </a>
+                );
+              }
+
               const isActive =
                 item.href === "/"
                   ? pathname === "/"
@@ -127,7 +143,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
+                  className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 lg:px-3.5 ${
                     isActive
                       ? "text-[var(--text-primary)]"
                       : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
@@ -306,10 +322,37 @@ export function SiteHeader() {
                   className="space-y-2 border-b border-[var(--accent-blue)]/30 pb-8 md:border-b-0 md:pb-0"
                 >
                   {OVERLAY_LINKS.map((item, index) => {
+                    const isExternal = "external" in item && item.external;
                     const isActive =
-                      item.href === "/"
+                      !isExternal &&
+                      (item.href === "/"
                         ? pathname === "/"
-                        : pathname.startsWith(item.href);
+                        : pathname.startsWith(item.href));
+
+                    const linkClassName = `group flex items-baseline justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 ${
+                      isActive
+                        ? "bg-white/[0.07] text-[var(--text-primary)]"
+                        : "text-[var(--text-secondary)] hover:bg-white/[0.04] hover:text-[var(--text-primary)]"
+                    }`;
+
+                    const linkBody = (
+                      <>
+                        <span className="font-display text-3xl font-semibold tracking-tight transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl">
+                          {item.label}
+                        </span>
+                        <span className="inline-flex items-center gap-2 font-mono-label text-xs text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-cyan)]">
+                          <span>0{index + 1}</span>
+                          <ArrowUpRight
+                            className={`h-4 w-4 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
+                              isExternal
+                                ? "opacity-80 group-hover:opacity-100"
+                                : "opacity-0 group-hover:opacity-100"
+                            }`}
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </>
+                    );
 
                     return (
                       <motion.li
@@ -328,27 +371,27 @@ export function SiteHeader() {
                           },
                         }}
                       >
-                        <Link
-                          href={item.href}
-                          onClick={() => setOpenPath(null)}
-                          aria-current={isActive ? "page" : undefined}
-                          className={`group flex items-baseline justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 ${
-                            isActive
-                              ? "bg-white/[0.07] text-[var(--text-primary)]"
-                              : "text-[var(--text-secondary)] hover:bg-white/[0.04] hover:text-[var(--text-primary)]"
-                          }`}
-                        >
-                          <span className="font-display text-3xl font-semibold tracking-tight transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl">
-                            {item.label}
-                          </span>
-                          <span className="inline-flex items-center gap-2 font-mono-label text-xs text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-cyan)]">
-                            <span>0{index + 1}</span>
-                            <ArrowUpRight
-                              className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-                              aria-hidden="true"
-                            />
-                          </span>
-                        </Link>
+                        {isExternal ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setOpenPath(null)}
+                            aria-label={`${item.label} on GitHub (opens in a new tab)`}
+                            className={linkClassName}
+                          >
+                            {linkBody}
+                          </a>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpenPath(null)}
+                            aria-current={isActive ? "page" : undefined}
+                            className={linkClassName}
+                          >
+                            {linkBody}
+                          </Link>
+                        )}
                       </motion.li>
                     );
                   })}
