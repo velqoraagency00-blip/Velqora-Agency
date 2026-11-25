@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AlertTriangle, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import {
+  HeroReveal,
   Reveal,
+  RollingLabel,
   StaggerGroup,
   StaggerItem,
 } from "@/components/MotionPrimitives";
@@ -11,29 +13,35 @@ import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: `Explore all 14 services offered by ${SITE_CONFIG.brandName}, spanning web and Shopify development, UX/UI design, mobile apps, AI video, marketing, and advisory.`,
+  description: `Explore all 11 services offered by ${SITE_CONFIG.brandName}, spanning web and Shopify development, UX/UI design, mobile apps, AI video, marketing, and advisory.`,
 };
 
 export default function ServicesPage() {
   return (
     <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Reveal>
+        <HeroReveal delay={0.02} y={14}>
           <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Services Directory
           </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.08} y={18}>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
             End-to-end digital capabilities{" "}
             <span className="text-gradient-velqora">under one roof</span>
           </h1>
+        </HeroReveal>
+
+        <HeroReveal delay={0.14} y={16}>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
-            {SITE_CONFIG.brandName} organizes 14 core services across four
+            {SITE_CONFIG.brandName} organizes 11 core services across four
             disciplines. Every engagement is scoped transparently—with no
             inflated promises or guaranteed outcome claims.
           </p>
-        </Reveal>
+        </HeroReveal>
 
-        <Reveal delay={0.08}>
+        <HeroReveal delay={0.18} y={12}>
           <nav
             aria-label="Service categories"
             className="mt-10 flex flex-wrap gap-2.5 border-y border-[var(--border-subtle)] py-4"
@@ -42,13 +50,13 @@ export default function ServicesPage() {
               <a
                 key={group.id}
                 href={`#${group.id}`}
-                className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+                className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
               >
                 {group.index}. {group.title}
               </a>
             ))}
           </nav>
-        </Reveal>
+        </HeroReveal>
 
         <div className="mt-14 space-y-20">
           {SERVICE_GROUPS.map((group) => (
@@ -58,7 +66,7 @@ export default function ServicesPage() {
               aria-labelledby={`${group.id}-heading`}
               className="scroll-mt-24"
             >
-              <Reveal>
+              <Reveal direction="left">
                 <div className="flex flex-col justify-between gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end">
                   <div>
                     <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--accent-cyan)]">
@@ -80,7 +88,7 @@ export default function ServicesPage() {
               <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2">
                 {group.items.map((service) => (
                   <StaggerItem key={service.id}>
-                    <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
+                    <article className="glass-panel velqora-card flex h-full flex-col justify-between rounded-2xl p-7">
                       <div>
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <h3 className="font-display text-xl font-semibold text-[var(--text-primary)]">
@@ -133,8 +141,8 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        <Reveal>
-          <div className="glass-panel mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:p-10">
+        <Reveal direction="scale">
+          <div className="glass-panel velqora-card mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:p-10">
             <div>
               <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
                 Need a tailored combination of services?
@@ -146,9 +154,9 @@ export default function ServicesPage() {
             </div>
             <Link
               href="/contact"
-              className="btn-gradient-velqora inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
+              className="btn-gradient-velqora velqora-roll-btn inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
             >
-              Contact {SITE_CONFIG.brandName}
+              <RollingLabel label={`Contact ${SITE_CONFIG.brandName}`} />
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

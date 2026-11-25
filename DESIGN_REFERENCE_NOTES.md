@@ -1,7 +1,7 @@
 # Velqora Agency — Design Reference Notes
 
 **Primary Visual & Interaction Reference:** `https://prichard.hu/en`  
-**Inspection Method:** Live Chrome DevTools inspection on Desktop (`1280×800`) and Mobile (`390×844`) — checking computed CSS styles, layout structure, navigation behavior, and scroll/hover interactions.
+**Inspection Method:** Live Chrome DevTools inspection on Desktop (`1280×800`) and Mobile (`390×844`) — checking computed CSS styles, layout structure, navigation behavior, and actual runtime animations/stylesheets.
 
 ---
 
@@ -22,18 +22,21 @@
 - **Section Headings:** Bold uppercase section titles with wider tracking (`letter-spacing: 2px`).
 - **Micro-Labels:** Small uppercase labels (`letter-spacing: 2px–3px`, ~`10–11px`) used for section tags, scroll indicators, and UI metadata.
 
-### Navigation & Mobile Menu
-- **Desktop (`1280×800`):** Fixed 3-zone header: left monogram logo, center inline links inside a translucent glass pill on scroll, right primary link + asymmetric Menu button. Clicking Menu opens a full-screen blurred dark overlay with a left contact/CTA column and right large stacked navigation links, plus direct email at the bottom.
-- **Mobile (`390×844`):** Simplifies to left monogram logo + right Menu button, opening a full-screen centered overlay with stacked links, divider, CTA, and contact info.
+### Navigation & Mobile Menu Motion
+- **Top bar & scroll pill:** Fixed `<nav>`. On scroll (`scrollY > 0`), the center menu wrapper gains `.menusor-glass` (`backdrop-filter: blur(12px)`, `background: rgba(15, 23, 42, 0.5)`, `1px solid rgba(255,255,255,0.08)`, `0.5s` transition).
+- **Full-screen Menu overlay (`#menuOverlay`):**
+  - Hamburger lines morph smoothly into an `X` (`0.3s` rotate transitions).
+  - Overlay container fades and un-hides (`0.5s cubic-bezier(0.16, 1, 0.3, 1)`) over a `20px` blurred midnight backdrop.
+  - Menu links stagger smoothly upward (`translateY(30px) → 0`, `opacity: 0 → 1`) alongside the left contact column on desktop, or centered vertical stack with a divider on mobile (`390×844`).
 
-### Hero Composition
-- **Desktop:** Full-viewport dark canvas with left-aligned H1, concise intro copy, pill gradient CTA, a prominent central/right visual sculpture, and a subtle `SCROLL` indicator at the bottom.
-- **Mobile:** Visual focal element sits above the left-aligned H1 and pill CTA.
-
-### Animations & Interactions
-- Scroll-triggered opacity/translate reveals on sections.
-- Scroll-driven scale expansion on a featured showcase frame.
-- Smooth `0.3s` color/background transitions on links and buttons with subtle dual-layer text motion.
+### Hero & Scroll Animations
+- **Hero immediacy:** No blocking preloader—main hero title and CTA load immediately at `opacity: 1` with subtle upward entrance (`heroFadeIn`, `15px → 0`) and animated `.hero-gradient-text` (`gradientShift` over `4s`).
+- **Hero focal visual:** Interactive 3D canvas centerpiece on desktop, placed above the headline on mobile.
+- **Desktop `SCROLL` indicator:** Animated vertical line (`scrollLineMove`, `2.5s` loop translating vertically along a thin track), hidden on mobile.
+- **Scroll-triggered reveals (`.anim_fel`):** Sections reveal from `translateY(40px)` and `opacity: 0` over `0.8s cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Scroll-driven showcase expansion:** Showcase frame scales smoothly from rounded centered inset toward full emphasis on scroll, then eases back.
+- **Interactive showcase carousel:** Smooth `translateX` card sliding (`0.6s cubic-bezier(0.16, 1, 0.3, 1)`) with `Previous` / `Next` controls.
+- **Rolling dual-layer button text (`.roll-btn` / `.flow-btn`):** Dual text spans shift vertically (`0 → -100%`) over `0.3s–0.4s` on hover/focus with expanding blue/cyan glow shadow; cards lift `-4px` with brighter cyan borders.
 
 ### Footer
 - Minimal single-row bar on desktop (copyright on left, utility/legal links on right) that stacks cleanly on mobile.
@@ -44,19 +47,19 @@
 
 | Reference Observation | Original Velqora Agency Decision |
 |---|---|
-| `#020617` midnight canvas + `#2563eb` / `#06b6d4` / `#6366f1` accents | Adopt a Midnight Void (`#020617`) + Elevated Slate (`#0B1120`) + Electric Cobalt (`#2563EB`) + Bright Cyan (`#06B6D4`) + Indigo (`#6366F1`) token system, adjusting muted text to `#94A3B8` / `#CBD5E1` for WCAG AA contrast. |
-| `Sora` geometric sans + tight H1 + uppercase micro-labels | Pair `Sora` (headings/UI) with `Plus Jakarta Sans` (body) and `JetBrains Mono` (micro-labels), using tight display tracking and crisp hierarchy. |
-| Left monogram + center glass pill + full-screen Menu overlay | Build an original **Velqora Agency** fixed 3-zone header with a custom faceted **V** monogram, a center glass-pill nav, and an accessible full-screen blurred Menu overlay (with `Escape` key & keyboard focus). |
-| Left-aligned hero + focal visual + gradient pill CTA | Create an original Hero featuring a custom geometric **V-monogram** architectural centerpiece (no copied 3D iPhone or particle ring, and **no** awards badge or fake stats). |
-| Scroll reveals, showcase scale, smooth button transitions | Implement `motion/react` `Reveal`, `StaggerGroup`, and a non-hijacked `ScrollShowcaseFrame` (`useScroll` + `useTransform` disabled automatically when `prefers-reduced-motion` is active). |
-| Dark translucent contact card with bottom-bordered inputs | Restyle `ContactForm.tsx` into a dark glass card with bottom-bordered inputs while preserving all Supabase `/api/contact` logic, honeypot, sensitive-data warning, and `velqoraagency00@gmail.com` fallback. |
-| Minimal single-row footer | Restyle `SiteFooter.tsx` as a clean midnight-navy footer with `Velqora Agency` branding, `velqoraagency00@gmail.com`, and navigation/Privacy links (no cookie banner since no tracking exists). |
+| `#020617` midnight canvas + `#2563eb` / `#06b6d4` / `#6366f1` accents | Keep Midnight Void (`#020617`) + Elevated Slate (`#0B1120`) + Cobalt/Cyan/Indigo tokens with WCAG AA-safe slate text (`#CBD5E1`, `#94A3B8`). |
+| Immediate hero visibility + subtle `heroFadeIn` + `gradientShift` + `SCROLL` beam | Build `HeroSequence` + `HeroLine` so the headline and CTAs settle within ~250ms (zero preloader delay), paired with a subtle animated gradient highlight and a desktop-only vertical scroll beam. |
+| Rotating 3D centerpiece (no copied canvas/iPhone) | Build `HeroVVisual`: an original animated SVG/Motion **V-monogram orbital sculpture** with path-drawing arms, glowing apex beacon, subtle orbital rings, and scroll-depth tilt (simplified & reduced-motion aware). |
+| `.menusor-glass` + `#menuOverlay` stagger & hamburger morph | Upgrade `SiteHeader` with a sliding `layoutId` active pill in the glass nav, animated two-line hamburger-to-X morph, `AnimatePresence` full-screen blur overlay, staggered link reveals, `Escape` closing, and accessible focus return. |
+| Scroll reveals, scroll-driven showcase frame & horizontal carousel | Upgrade `MotionPrimitives` (`Reveal` directional variants, `StaggerGroup`, `ScrollShowcaseBand`, `ScrollParallaxLayer`) and add an interactive `ConceptShowcase` carousel with `Previous` / `Next` & keyboard-accessible tabs for Velqora's concept builds. |
+| Rolling button text & card elevation | Build `RollingLabel` (dual-layer vertical text roll triggered on both hover and keyboard `:focus-visible`) and `.velqora-card` lift/glow transitions. |
+| Dark translucent contact card with bottom-bordered inputs | Keep the redesigned dark glass `ContactForm` with animated input focus lines, preserving all Phase 2A Supabase API logic, validation, honeypot, and `velqoraagency00@gmail.com` fallback. |
 
 ---
 
 ## 3. What Could Not Be Verified / Intentionally Omitted
-- **Unverified internals:** Exact numeric easing curves and compiled third-party animation parameters inside the reference's minified JavaScript bundles were not inspected and were replaced with original `motion/react` implementations.
-- **Intentionally omitted for compliance & usability:**
-  - **Lenis scroll hijacking:** Omitted to preserve native browser scroll and accessibility.
-  - **Pointer-only custom cursor:** Omitted to avoid pointer-only interactions.
+- **Unverified internals:** Exact GSAP / Lenis scrub breakpoints and compiled WebGL shader math inside the reference's minified JS bundles could not be inspected in readable source and were not copied; all Velqora animations are original `motion/react` and CSS implementations.
+- **Intentionally omitted for compliance & accessibility:**
+  - **Lenis scroll hijacking & excessive parallax:** Omitted so native browser scrolling and `prefers-reduced-motion` always work naturally.
+  - **Pointer-only custom cursor:** Omitted to ensure full keyboard, touch, and mouse parity.
   - **Awards badge, phone numbers, multi-step phone field, and floating chat widget:** Omitted per Velqora Agency's strict no-fake-awards, email-only (`velqoraagency00@gmail.com`), and Phase 2A scope rules.

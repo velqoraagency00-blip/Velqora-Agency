@@ -65,7 +65,7 @@ The contact form sends submissions to a server-side Next.js route (`src/app/api/
 All main text, services, and concept projects live in clean data files inside `src/data/`:
 
 - **`src/data/site.ts`** — Brand name, contact email (`velqoraagency00@gmail.com`), navigation links, and agency approach steps.
-- **`src/data/services.ts`** — All 14 services grouped by category, descriptions, and deliverables.
+- **`src/data/services.ts`** — All 11 services grouped by category, descriptions, and deliverables.
 - **`src/data/work.ts`** — Capability and concept examples shown on the Home and Work pages.
 
 ### Replacing Concept Work with Real Projects
@@ -76,6 +76,4 @@ All main text, services, and concept projects live in clean data files inside `s
 
 ## Items Flagged for Legal & Business Review
 Before launching publicly, have a qualified advisor review:
-- **Credit repair** service copy (ensure compliance with applicable credit-repair laws such as CROA in the US; never promise guaranteed score increases or deletions).
-- **Public records** & **Online reputation management** descriptions (ensure lawful, accurate framing).
 - **Privacy Policy** (`/privacy`) — currently a draft describing Supabase storage; review with legal counsel before launch.

@@ -48,12 +48,6 @@ html {
   color: var(--text-primary);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
 body {
   background-color: var(--bg-void);
   color: var(--text-primary);
@@ -76,29 +70,106 @@ body {
   font-family: var(--font-mono);
 }
 
+@keyframes velqoraGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes velqoraScrollBeam {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes velqoraOrbitSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .text-gradient-velqora {
-  background: linear-gradient(95deg, #6366f1 0%, #3b82f6 48%, #06b6d4 100%);
+  background: linear-gradient(
+    95deg,
+    #6366f1 0%,
+    #3b82f6 35%,
+    #06b6d4 70%,
+    #6366f1 100%
+  );
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: velqoraGradientShift 7s ease infinite;
 }
 
 .btn-gradient-velqora {
   background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
   box-shadow: 0 10px 28px rgba(37, 99, 235, 0.34);
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.25s ease;
 }
 
-.btn-gradient-velqora:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 34px rgba(6, 182, 212, 0.38);
-  filter: brightness(1.06);
+.btn-gradient-velqora:hover,
+.btn-gradient-velqora:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(6, 182, 212, 0.42);
+  filter: brightness(1.07);
 }
 
 .btn-gradient-velqora:active {
   transform: translateY(0);
+}
+
+/* Dual-layer vertical rolling text for primary/secondary CTAs */
+.velqora-roll-track {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+.velqora-roll-primary,
+.velqora-roll-secondary {
+  display: inline-block;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.velqora-roll-secondary {
+  position: absolute;
+  left: 0;
+  top: 100%;
+}
+
+.velqora-roll-btn:hover .velqora-roll-primary,
+.velqora-roll-btn:focus-visible .velqora-roll-primary {
+  transform: translateY(-100%);
+}
+
+.velqora-roll-btn:hover .velqora-roll-secondary,
+.velqora-roll-btn:focus-visible .velqora-roll-secondary {
+  transform: translateY(-100%);
 }
 
 .glass-panel {
@@ -106,6 +177,42 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
+}
+
+.velqora-card {
+  position: relative;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s ease,
+    box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.32s ease;
+}
+
+.velqora-card:hover,
+.velqora-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: 0 20px 44px rgba(2, 6, 23, 0.65),
+    0 0 0 1px rgba(6, 182, 212, 0.12);
+}
+
+.scroll-beam-track {
+  position: relative;
+  overflow: hidden;
+  width: 1px;
+  height: 44px;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.scroll-beam-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, #06b6d4, transparent);
+  animation: velqoraScrollBeam 2.4s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+.orbit-ring-slow {
+  transform-origin: 160px 160px;
+  animation: velqoraOrbitSlow 48s linear infinite;
 }
 
 .ambient-grid {
@@ -123,8 +230,25 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .text-gradient-velqora,
+  .scroll-beam-line,
+  .orbit-ring-slow {
+    animation: none;
+  }
+
   .btn-gradient-velqora,
-  .btn-gradient-velqora:hover {
+  .btn-gradient-velqora:hover,
+  .btn-gradient-velqora:focus-visible,
+  .velqora-card,
+  .velqora-card:hover,
+  .velqora-card:focus-within,
+  .velqora-roll-primary,
+  .velqora-roll-secondary {
+    transition: none;
     transform: none;
   }
 }

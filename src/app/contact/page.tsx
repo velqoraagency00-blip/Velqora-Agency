@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, ShieldCheck } from "lucide-react";
-import { Reveal } from "@/components/MotionPrimitives";
 import { ContactForm } from "@/components/ContactForm";
+import { HeroReveal, Reveal } from "@/components/MotionPrimitives";
 import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -13,24 +13,30 @@ export default function ContactPage() {
   return (
     <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Reveal>
+        <HeroReveal delay={0.02} y={14}>
           <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Contact {SITE_CONFIG.brandName}
           </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.08} y={18}>
           <h1 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
             Let&apos;s discuss{" "}
             <span className="text-gradient-velqora">your project</span>
           </h1>
+        </HeroReveal>
+
+        <HeroReveal delay={0.14} y={16}>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
             Reach out by email with a brief overview of your goals, or send your
             inquiry directly using the form below.
           </p>
-        </Reveal>
+        </HeroReveal>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-5">
-            <Reveal delay={0.08}>
-              <div className="glass-panel rounded-2xl p-7">
+            <Reveal direction="left" delay={0.06}>
+              <div className="glass-panel velqora-card rounded-2xl p-7">
                 <h2 className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">
                   Direct Email
                 </h2>
@@ -48,8 +54,8 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.14}>
-              <div className="glass-panel rounded-2xl p-7">
+            <Reveal direction="left" delay={0.12}>
+              <div className="glass-panel velqora-card rounded-2xl p-7">
                 <div className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)]">
                   <ShieldCheck
                     className="h-4 w-4 text-[var(--accent-cyan)]"
@@ -67,7 +73,7 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <Reveal delay={0.12}>
+            <Reveal direction="right" delay={0.08}>
               <ContactForm />
             </Reveal>
           </div>

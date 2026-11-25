@@ -3,10 +3,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Mail, ShieldAlert } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { EASE_OUT_EXPO, RollingLabel } from "@/components/MotionPrimitives";
 import { ALL_SERVICE_NAMES } from "@/data/services";
 import { SITE_CONFIG } from "@/data/site";
 
 export function ContactForm() {
+  const prefersReducedMotion = useReducedMotion();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState("");
@@ -92,7 +95,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="glass-panel relative rounded-2xl p-6 sm:p-8"
+      className="glass-panel velqora-card relative rounded-2xl p-6 sm:p-8"
     >
       {/* Sensitive-data warning */}
       <div className="mb-7 flex items-start gap-3 rounded-xl border border-amber-400/30 bg-amber-400/10 p-4 text-xs leading-relaxed text-amber-100">
@@ -144,7 +147,7 @@ export function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Alex Rivera"
-            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 focus:border-[var(--accent-cyan)] focus:outline-none"
+            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 transition-colors focus:border-[var(--accent-cyan)] focus:outline-none"
           />
         </div>
 
@@ -165,7 +168,7 @@ export function ContactForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 focus:border-[var(--accent-cyan)] focus:outline-none"
+            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 transition-colors focus:border-[var(--accent-cyan)] focus:outline-none"
           />
         </div>
 
@@ -183,7 +186,7 @@ export function ContactForm() {
             required
             value={service}
             onChange={(e) => setService(e.target.value)}
-            className="mt-2 w-full border-b border-[var(--border-strong)] bg-[var(--bg-surface)] py-2.5 text-sm text-[var(--text-primary)] focus:border-[var(--accent-cyan)] focus:outline-none"
+            className="mt-2 w-full border-b border-[var(--border-strong)] bg-[var(--bg-surface)] py-2.5 text-sm text-[var(--text-primary)] transition-colors focus:border-[var(--accent-cyan)] focus:outline-none"
           >
             <option value="">Select a service...</option>
             {ALL_SERVICE_NAMES.map((serviceName) => (
@@ -211,7 +214,7 @@ export function ContactForm() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Tell us about your goals, timeline, and what you need help with..."
-            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 focus:border-[var(--accent-cyan)] focus:outline-none"
+            className="mt-2 w-full border-b border-[var(--border-strong)] bg-transparent py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/60 transition-colors focus:border-[var(--accent-cyan)] focus:outline-none"
           />
         </div>
 
@@ -241,50 +244,64 @@ export function ContactForm() {
         </div>
       </div>
 
-      {errorMessage && (
-        <div
-          role="alert"
-          className="mt-6 rounded-xl border border-red-400/40 bg-red-950/50 p-4 text-xs leading-relaxed text-red-100"
-        >
-          <p className="font-semibold">{errorMessage}</p>
-          <a
-            href={mailtoHref}
-            className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium text-white transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+      <AnimatePresence>
+        {errorMessage && (
+          <motion.div
+            key="contact-error"
+            role="alert"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
+            transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
+            className="mt-6 rounded-xl border border-red-400/40 bg-red-950/50 p-4 text-xs leading-relaxed text-red-100"
           >
-            <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-            Email {SITE_CONFIG.contactEmail} instead
-          </a>
-        </div>
-      )}
+            <p className="font-semibold">{errorMessage}</p>
+            <a
+              href={mailtoHref}
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium text-white transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+            >
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+              Email {SITE_CONFIG.contactEmail} instead
+            </a>
+          </motion.div>
+        )}
 
-      {isSaved && (
-        <div
-          role="status"
-          className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-400/40 bg-emerald-950/50 p-4 text-xs leading-relaxed text-emerald-100"
-        >
-          <CheckCircle2
-            className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400"
-            aria-hidden="true"
-          />
-          <div>
-            <p className="font-semibold text-white">
-              Your inquiry has been saved.
-            </p>
-            <p className="mt-1 text-emerald-100/90">
-              Thank you for contacting {SITE_CONFIG.brandName}. Our team reviews
-              saved inquiries and will reply to your email address.
-            </p>
-          </div>
-        </div>
-      )}
+        {isSaved && (
+          <motion.div
+            key="contact-success"
+            role="status"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
+            transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
+            className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-400/40 bg-emerald-950/50 p-4 text-xs leading-relaxed text-emerald-100"
+          >
+            <CheckCircle2
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400"
+              aria-hidden="true"
+            />
+            <div>
+              <p className="font-semibold text-white">
+                Your inquiry has been saved.
+              </p>
+              <p className="mt-1 text-emerald-100/90">
+                Thank you for contacting {SITE_CONFIG.brandName}. Our team
+                reviews saved inquiries and will reply to your email address.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="mt-8">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-gradient-velqora inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="btn-gradient-velqora velqora-roll-btn inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          {isSubmitting ? "Sending inquiry..." : "Send Inquiry"}
+          <RollingLabel
+            label={isSubmitting ? "Sending inquiry..." : "Send Inquiry"}
+          />
         </button>
       </div>
     </form>

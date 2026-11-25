@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
+import { Reveal, RollingLabel } from "@/components/MotionPrimitives";
 import { NAV_ITEMS, SITE_CONFIG } from "@/data/site";
 
 export function SiteFooter() {
@@ -10,30 +11,32 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-void)] text-[var(--text-primary)]">
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-14">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <div>
-            <Link
-              href="/"
-              className="inline-block rounded-lg"
-              aria-label="Velqora Agency home"
-            >
-              <BrandLogo size="md" />
-            </Link>
-            <p className="mt-3 max-w-md text-xs leading-relaxed text-[var(--text-muted)]">
-              Digital products, design systems, and growth engineering. Email is
-              our sole direct contact channel.
-            </p>
-          </div>
+        <Reveal>
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+            <div>
+              <Link
+                href="/"
+                className="inline-block rounded-lg"
+                aria-label="Velqora Agency home"
+              >
+                <BrandLogo size="md" />
+              </Link>
+              <p className="mt-3 max-w-md text-xs leading-relaxed text-[var(--text-muted)]">
+                Digital products, design systems, and growth engineering. Email
+                is our sole direct contact channel.
+              </p>
+            </div>
 
-          <a
-            href={`mailto:${SITE_CONFIG.contactEmail}`}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
-          >
-            <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
-            <span className="break-all">{SITE_CONFIG.contactEmail}</span>
-            <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          </a>
-        </div>
+            <a
+              href={`mailto:${SITE_CONFIG.contactEmail}`}
+              className="velqora-roll-btn inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+            >
+              <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <RollingLabel label={SITE_CONFIG.contactEmail} />
+              <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            </a>
+          </div>
+        </Reveal>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--border-subtle)] pt-6 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center">
           <p>&copy; {year} Velqora Agency. All rights reserved.</p>

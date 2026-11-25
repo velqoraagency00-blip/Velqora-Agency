@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { AlertTriangle } from "lucide-react";
-import { Reveal } from "@/components/MotionPrimitives";
+import {
+  HeroReveal,
+  StaggerGroup,
+  StaggerItem,
+} from "@/components/MotionPrimitives";
 import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -12,10 +16,13 @@ export default function PrivacyPage() {
   return (
     <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
-        <Reveal>
+        <HeroReveal delay={0.02} y={14}>
           <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Privacy Policy (Draft)
           </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.08} y={18}>
           <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
             How {SITE_CONFIG.brandName} handles information
           </h1>
@@ -23,9 +30,9 @@ export default function PrivacyPage() {
             Draft baseline policy — requires owner and legal review prior to
             public launch.
           </p>
-        </Reveal>
+        </HeroReveal>
 
-        <Reveal delay={0.08}>
+        <HeroReveal delay={0.14} y={14}>
           <div className="glass-panel mt-8 flex items-start gap-3 rounded-2xl p-5 text-sm text-[var(--text-secondary)]">
             <AlertTriangle
               className="mt-0.5 h-5 w-5 shrink-0 text-amber-300"
@@ -40,102 +47,118 @@ export default function PrivacyPage() {
               qualified legal advisor before relying on it for legal compliance.
             </p>
           </div>
-        </Reveal>
+        </HeroReveal>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              1. Information Collected Through the Contact Form
-            </h2>
-            <p className="mt-2">
-              When you submit the contact form on this website, we collect only
-              the details you enter:{" "}
-              <strong className="text-[var(--text-primary)]">your name</strong>,{" "}
-              <strong className="text-[var(--text-primary)]">
-                email address
-              </strong>
-              ,{" "}
-              <strong className="text-[var(--text-primary)]">
-                service of interest
-              </strong>
-              , <strong className="text-[var(--text-primary)]">message</strong>,
-              and your{" "}
-              <strong className="text-[var(--text-primary)]">
-                privacy consent confirmation
-              </strong>
-              . We do not collect phone numbers through the form.
-            </p>
-          </section>
+        <StaggerGroup className="mt-10 space-y-8 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                1. Information Collected Through the Contact Form
+              </h2>
+              <p className="mt-2">
+                When you submit the contact form on this website, we collect
+                only the details you enter:{" "}
+                <strong className="text-[var(--text-primary)]">your name</strong>
+                ,{" "}
+                <strong className="text-[var(--text-primary)]">
+                  email address
+                </strong>
+                ,{" "}
+                <strong className="text-[var(--text-primary)]">
+                  service of interest
+                </strong>
+                ,{" "}
+                <strong className="text-[var(--text-primary)]">message</strong>,
+                and your{" "}
+                <strong className="text-[var(--text-primary)]">
+                  privacy consent confirmation
+                </strong>
+                . We do not collect phone numbers through the form.
+              </p>
+            </section>
+          </StaggerItem>
 
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              2. How &amp; Where Inquiries Are Stored
-            </h2>
-            <p className="mt-2">
-              Submitted inquiries are validated by our server and stored in our{" "}
-              <strong className="text-[var(--text-primary)]">Supabase</strong>{" "}
-              database so {SITE_CONFIG.brandName} can review them and respond to
-              you. Inquiries are accessed only through the authenticated Supabase
-              dashboard and are not exposed through public website endpoints.
-            </p>
-          </section>
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                2. How &amp; Where Inquiries Are Stored
+              </h2>
+              <p className="mt-2">
+                Submitted inquiries are validated by our server and stored in
+                our{" "}
+                <strong className="text-[var(--text-primary)]">Supabase</strong>{" "}
+                database so {SITE_CONFIG.brandName} can review them and respond
+                to you. Inquiries are accessed only through the authenticated
+                Supabase dashboard and are not exposed through public website
+                endpoints.
+              </p>
+            </section>
+          </StaggerItem>
 
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              3. Direct Email Inquiries
-            </h2>
-            <p className="mt-2">
-              If you email{" "}
-              <a
-                href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
-              >
-                {SITE_CONFIG.contactEmail}
-              </a>{" "}
-              directly, we use your email address and message to respond to your
-              inquiry.
-            </p>
-          </section>
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                3. Direct Email Inquiries
+              </h2>
+              <p className="mt-2">
+                If you email{" "}
+                <a
+                  href={`mailto:${SITE_CONFIG.contactEmail}`}
+                  className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
+                >
+                  {SITE_CONFIG.contactEmail}
+                </a>{" "}
+                directly, we use your email address and message to respond to
+                your inquiry.
+              </p>
+            </section>
+          </StaggerItem>
 
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              4. Analytics &amp; Tracking
-            </h2>
-            <p className="mt-2">
-              {SITE_CONFIG.brandName} does not currently use third-party
-              advertising trackers, behavioral cookies, or analytics scripts on
-              this website.
-            </p>
-          </section>
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                4. Analytics &amp; Tracking
+              </h2>
+              <p className="mt-2">
+                {SITE_CONFIG.brandName} does not currently use third-party
+                advertising trackers, behavioral cookies, or analytics scripts
+                on this website.
+              </p>
+            </section>
+          </StaggerItem>
 
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              5. Sensitive Personal &amp; Financial Data
-            </h2>
-            <p className="mt-2">
-              Please do not send passwords, Social Security numbers, payment
-              account numbers, or confidential financial documents through the
-              website contact form or initial inquiry emails.
-            </p>
-          </section>
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                5. Sensitive Personal &amp; Financial Data
+              </h2>
+              <p className="mt-2">
+                Please do not send passwords, Social Security numbers, payment
+                account numbers, or confidential financial documents through the
+                website contact form or initial inquiry emails.
+              </p>
+            </section>
+          </StaggerItem>
 
-          <section>
-            <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
-              6. Contact for Privacy Questions
-            </h2>
-            <p className="mt-2">
-              For any privacy-related questions or to request removal of a
-              submitted inquiry, contact {SITE_CONFIG.brandName} at{" "}
-              <a
-                href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
-              >
-                {SITE_CONFIG.contactEmail}
-              </a>
-              .
-            </p>
-          </section>
-        </div>
+          <StaggerItem>
+            <section>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                6. Contact for Privacy Questions
+              </h2>
+              <p className="mt-2">
+                For any privacy-related questions or to request removal of a
+                submitted inquiry, contact {SITE_CONFIG.brandName} at{" "}
+                <a
+                  href={`mailto:${SITE_CONFIG.contactEmail}`}
+                  className="font-medium text-[var(--text-primary)] underline decoration-[var(--accent-cyan)] underline-offset-2 hover:text-[var(--accent-cyan)]"
+                >
+                  {SITE_CONFIG.contactEmail}
+                </a>
+                .
+              </p>
+            </section>
+          </StaggerItem>
+        </StaggerGroup>
       </div>
     </div>
   );

@@ -154,11 +154,11 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     ],
   },
   {
-    id: "advisory-reputation-records",
+    id: "advisory-consulting",
     index: "04",
-    title: "Advisory, Reputation & Records",
+    title: "Strategic Advisory",
     subtitle:
-      "Strategic consulting alongside specialized reputation, credit-education, and public-records workflows handled with strict scope clarity.",
+      "Practical technical, digital-product, and operational guidance to help you choose the right stack, roadmap, and priorities.",
     items: [
       {
         id: "consulting",
@@ -170,48 +170,6 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           "Product roadmap workshops",
           "Implementation advisory",
         ],
-      },
-      {
-        id: "online-reputation-management",
-        name: "Online reputation management",
-        summary:
-          "Structured brand monitoring, owned-media strengthening, and ethical review-response frameworks. We never promise removal of lawful third-party content.",
-        deliverables: [
-          "Search presence & brand audit",
-          "Owned-property & profile optimization",
-          "Review response playbooks",
-        ],
-        needsLegalReview: true,
-        reviewNote:
-          "Flagged for business & legal review: ensure claims reflect lawful reputation practices without promising third-party content removal.",
-      },
-      {
-        id: "credit-repair",
-        name: "Credit repair",
-        summary:
-          "Educational guidance, credit-report organization, and dispute-workflow support. Individual outcomes vary and no specific score increase or deletion is ever guaranteed.",
-        deliverables: [
-          "Credit report review & organization",
-          "Written dispute-letter preparation support",
-          "Ongoing credit-hygiene education",
-        ],
-        needsLegalReview: true,
-        reviewNote:
-          "Flagged for legal review: subject to consumer credit laws (such as CROA in the US). Never promise guaranteed results or collect sensitive financial data via public web forms.",
-      },
-      {
-        id: "public-records",
-        name: "Public records",
-        summary:
-          "Lawful assistance with locating, organizing, and summarizing publicly available filings and open government records for legitimate business or personal reference.",
-        deliverables: [
-          "Public-source record lookup workflows",
-          "Structured document organization",
-          "Plain-English filing summaries",
-        ],
-        needsLegalReview: true,
-        reviewNote:
-          "Flagged for legal review: ensure scope clearly states reliance on lawful, publicly accessible sources and compliance with applicable privacy and FCRA rules.",
       },
     ],
   },

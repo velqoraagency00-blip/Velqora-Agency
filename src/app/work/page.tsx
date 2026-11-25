@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Info, Sparkles } from "lucide-react";
+import { ConceptShowcase } from "@/components/ConceptShowcase";
 import {
+  HeroReveal,
   Reveal,
+  RollingLabel,
+  ScrollShowcaseBand,
   StaggerGroup,
   StaggerItem,
 } from "@/components/MotionPrimitives";
@@ -18,22 +22,28 @@ export default function WorkPage() {
   return (
     <div className="bg-[var(--bg-void)] py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Reveal>
+        <HeroReveal delay={0.02} y={14}>
           <p className="font-mono-label text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]">
             Work &amp; Capabilities
           </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.08} y={18}>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-5xl">
             Concept architectures built to show{" "}
             <span className="text-gradient-velqora">how we think</span>
           </h1>
+        </HeroReveal>
+
+        <HeroReveal delay={0.14} y={16}>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
             Every card below is an original capability concept created by{" "}
             {SITE_CONFIG.brandName}. We do not publish fabricated client names,
             invented awards, or made-up performance metrics.
           </p>
-        </Reveal>
+        </HeroReveal>
 
-        <Reveal delay={0.08}>
+        <HeroReveal delay={0.18} y={14}>
           <aside
             aria-label="Note on concept placeholders"
             className="glass-panel mt-8 flex items-start gap-3.5 rounded-2xl p-5 text-sm text-[var(--text-secondary)]"
@@ -63,12 +73,16 @@ export default function WorkPage() {
               </p>
             </div>
           </aside>
-        </Reveal>
+        </HeroReveal>
+
+        <ScrollShowcaseBand className="mt-12">
+          <ConceptShowcase />
+        </ScrollShowcaseBand>
 
         <StaggerGroup className="mt-12 grid gap-6 md:grid-cols-2">
           {WORK_CONCEPTS.map((project, index) => (
             <StaggerItem key={project.id}>
-              <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-7 transition-colors duration-300 hover:border-[var(--border-glow)]">
+              <article className="glass-panel velqora-card flex h-full flex-col justify-between rounded-2xl p-7">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">
@@ -117,8 +131,8 @@ export default function WorkPage() {
           ))}
         </StaggerGroup>
 
-        <Reveal>
-          <div className="glass-panel mt-16 rounded-3xl p-8 text-center sm:p-12">
+        <Reveal direction="scale">
+          <div className="glass-panel velqora-card mt-16 rounded-3xl p-8 text-center sm:p-12">
             <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)] sm:text-3xl">
               Have a project in mind?
             </h2>
@@ -129,9 +143,9 @@ export default function WorkPage() {
             <div className="mt-6">
               <Link
                 href="/contact"
-                className="btn-gradient-velqora inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
+                className="btn-gradient-velqora velqora-roll-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
               >
-                Discuss your project
+                <RollingLabel label="Discuss your project" />
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
